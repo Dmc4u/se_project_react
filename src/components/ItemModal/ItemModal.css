@@ -1,0 +1,69 @@
+
+
+.modal__close_type_image {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-image: url(../../assets/Close-Icon-white.svg);
+  
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal__close:hover {
+  opacity: 1;
+}
+
+
+
+.modal__content-image {
+  max-width: 496px;
+  width: 100%;
+  min-height: 436px;
+  position: relative;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  box-sizing: border-box;
+  transform: scale(0.9);
+  transition: transform 0.3s linear;
+}
+
+.modal__image {
+  max-width: 498px;
+  max-height: 498px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  
+}
+
+.modal__info {
+  margin: 20px, 
+  
+}
+
+.modal__title-image {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  margin-left: 32px;
+
+}
+
+.modal__weather {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  margin-left: 32px;
+  margin-bottom: 32px;
+}

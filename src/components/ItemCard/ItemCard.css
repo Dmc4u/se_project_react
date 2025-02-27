@@ -1,0 +1,90 @@
+@font-face {
+  src: url("../assets/yellowtail-regular.woff") format("woff");
+  font-family: "Yellowtail";
+}
+
+/* @font-face {
+  src: url("../assets/roboto-regular.woff") format("woff");
+  font-family: "Roboto";
+} */
+
+.cards {
+  font-family: Cabinet Grotesk;
+    border-radius: 10px;
+    margin: 0 auto;
+  }
+
+    .cards__text {
+        width: 330;
+        height: 25;
+        font-family: Cabinet Grotesk;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24.8px;
+        letter-spacing: 0%;
+        padding: 0;
+        margin: 40px auto;
+
+    }
+
+
+  
+  .cards__list {
+    list-style-type: none;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, 328px);
+    gap: 19px 15px;
+    padding: 0;
+    
+  }
+
+  .cards__item {
+    position: relative; /* Allows absolute positioning of the title */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #f5f5f5; /* Match background with Figma */
+    padding: 16px;
+    
+}
+
+
+.cards__item-title {
+    position: absolute;
+    top: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 1); /* Solid white background */
+    width: 73px; /* Exact width */
+    height: 24px; /* Exact height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px; /* Rounded corners */
+    font-family: Cabinet Grotesk;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: #000; /* Dark text for contrast */
+    text-align: center;
+    white-space: nowrap;
+}
+
+  .cards__item-image {
+    width: 328px;
+    height: 328px;
+    object-fit: cover;
+  }
+
+  
+  .cards__item-image {
+    width: 328px;
+    height: 328px;
+    object-fit: cover;
+  }

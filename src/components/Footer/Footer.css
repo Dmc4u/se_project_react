@@ -1,0 +1,45 @@
+@font-face {
+    src: url("../assets/yellowtail-regular.woff") format("woff");
+    font-family: "Yellowtail";
+  }
+
+  /* @font-face {
+    src: url("../assets/roboto-regular.woff") format("woff");
+    font-family: "Roboto";
+  } */
+
+.footer {
+    margin: 171px 0 24px;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.footer__title {
+    width: 204px;
+    height: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-family: Cabinet Grotesk;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: rgba(0, 0, 0, 1);
+    
+
+}
+
+.footer__copyright {
+    width: 38px;
+    height: 20px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: rgba(0, 0, 0, 1);
+    
+
+}
