@@ -6,8 +6,7 @@
     height: 80px;
     border-radius: 12px;
     overflow: hidden;
-    /* background-size: cover;
-    background-position: right top; */
+   
   }
   
   .weather-card__temp {
@@ -30,4 +29,21 @@
     object-position: right top;
     width: 100%;
   }
+
+  @media (max-width: 768px) {
+    .modal__content {
+      max-width: 90%;
+      padding: 20px;
+    }
+  
+    .modal__title {
+      font-size: 18px;
+    }
+  
+    .modal__submit {
+      font-size: 18px;
+      height: 40px;
+    }
+  }
+  
   

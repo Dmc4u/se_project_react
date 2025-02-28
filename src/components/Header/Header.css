@@ -3,12 +3,9 @@
     font-family: "Yellowtail";
   }
 
-  /* @font-face {
-    src: url("../assets/roboto-regular.woff") format("woff");
-    font-family: "Roboto";
-  } */
 
-  .header {
+
+  /* .header {
     display: flex;
     align-items: center; 
     padding: 32px 0 28px;
@@ -72,4 +69,95 @@
         margin-left: 12px;
         border: 1px solid rgba(0, 0, 0, 0.5);
         margin: 0;
+    } */
+
+
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 32px 0 28px;
+      position: relative;
     }
+    
+    .header__logo {
+      width: 89px;
+      height: 40px;
+      margin-right: 24px;
+    }
+    
+    .header__date-and-location {
+      width: 160px;
+      height: 24px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, 1);
+      margin: 0;
+    }
+    
+    .header__add-clothes-btn {
+      margin-left: auto;
+      width: 116px;
+      height: 24px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: rgba(0, 0, 0, 1);
+      border: none;
+    }
+    
+    .header__user-container {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+      gap: 12px;
+    }
+    
+    .header__username {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 25px;
+      color: rgba(0, 0, 0, 1);
+      margin: 0;
+    }
+    
+    .header__avatar {
+      width: 40px;
+      height: 40px;
+      margin-left: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      margin: 0;
+    }
+    
+    .header__menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 20px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-weight: 700;
+      color: rgba(0, 0, 0, 1);
+      cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+      .header__menu-btn {
+        display: block;
+      }
+      
+      .nav-closed {
+        display: none;
+      }
+    
+      .nav-open {
+        display: block;
+      }
+    
+      .header__add-clothes-btn, .header__user-container, .header__date-and-location {
+        display: none;
+      }
+    }
+    
