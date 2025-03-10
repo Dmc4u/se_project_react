@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./WeatherCard.css";
 import { weatherOptions } from "../../utils/constants";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 
 function WeatherCard({ temperature, condition, isDay }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const matchedWeather = weatherOptions.find(
     (option) => option.condition === condition && option.day === isDay
   );
@@ -17,7 +19,7 @@ function WeatherCard({ temperature, condition, isDay }) {
         backgroundPosition: "right top",
       }}
     >
-      <p className="weather-card__temp">{temperature}°F</p>
+      <p className="weather-card__temp">{temperature[currentTemperatureUnit]}°{currentTemperatureUnit}</p>
     </div>
   );
 }

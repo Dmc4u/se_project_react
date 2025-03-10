@@ -19,6 +19,10 @@
   margin: 0;
 }
 
+.header__toggle-switch {
+  margin-right: 20px;
+}
+
 .header__add-clothes-btn {
   margin-left: auto;
   font-weight: 700;

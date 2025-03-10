@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddClick, weatherData }) {
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
@@ -22,6 +23,8 @@ function Header({ handleAddClick, weatherData }) {
         {formattedDate}, {weatherData.city || "Loading..."}
       </p>
 
+      <ToggleSwitch className="header__toggle-switch" />
+
       <button onClick={handleAddClick} type="button" className="header__add-clothes-btn">
         + Add Clothes
       </button>
@@ -40,6 +43,7 @@ function Header({ handleAddClick, weatherData }) {
           <div className="header__menu-content">
             <p className="header__menu-date">{formattedDate}, {weatherData.city || "Loading..."}</p>
             <img src={avatar} alt="User Avatar" className="header__menu-avatar" />
+            <ToggleSwitch />
             <p className="header__menu-username">Terrence Tegegne</p>
             <ul className="header__menu-list">
               <li>

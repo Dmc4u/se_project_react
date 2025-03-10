@@ -3,15 +3,14 @@
   font-family: "Yellowtail";
 }
 
-/* @font-face {
-  src: url("../assets/roboto-regular.woff") format("woff");
-  font-family: "Roboto";
-} */
-
 .cards {
-  font-family: Cabinet Grotesk;
+    font-family: Cabinet Grotesk;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
-    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
   }
 
     .cards__text {
@@ -27,18 +26,6 @@
 
     }
 
-
-  
-  .cards__list {
-    list-style-type: none;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    grid-template-columns: repeat(auto-fit, 328px);
-    gap: 19px 15px;
-    padding: 0;
-    
-  }
 
   .cards__item {
     position: relative; /* Allows absolute positioning of the title */
@@ -76,13 +63,6 @@
     white-space: nowrap;
 }
 
-  .cards__item-image {
-    width: 328px;
-    height: 328px;
-    object-fit: cover;
-  }
-
-  
   .cards__item-image {
     width: 328px;
     height: 328px;

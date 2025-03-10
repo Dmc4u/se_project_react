@@ -1,0 +1,79 @@
+.toggle-switch {
+  position: relative;
+  top: 50%;
+  left: 45%;  
+  max-width: 56px;
+  width: 100%;
+  height: 28px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-switch__checkbox {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+} 
+
+.toggle-switch__circle {
+    background: #000;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    transition: transform 0.4s ease-in-out;
+     /* mix-blend-mode: difference;  */
+}
+
+.toggle-switch__text {
+    font-family: Cabinet Grotesk;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: gray;
+    text-align: center;
+    position: absolute;
+    top: 5px;
+    z-index: 1;
+}
+
+.toggle-switch__text__F {
+    left: 8px;
+}
+
+.toggle-switch__text__C {
+    right: 8px;
+}
+
+/* Move Circle when Checked */
+.toggle-switch__checkbox:checked + .toggle-switch__circle {
+    transform: translateX(3px);
+    
+  }
+
+  .toggle-switch__checkbox:not(:checkek) + .toggle-switch__circle {
+    transform: translateY(14px);
+  }
+
+.toggle-switch__checkbox:checked + .toggle-switch__circle {
+    left: 28px;
+}
+
+.toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text__F {
+    color: white;
+} 
+
+.toggle-switch__checkbox:checked ~ .toggle-switch__text__C {
+    color: white;
+}
+
+

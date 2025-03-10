@@ -1,9 +1,13 @@
 import React from "react";
 import "./ItemModal.css";
 
-function ItemModal({ item, onClose }) {
+function ItemModal({ isOpen, item, onClose }) {
+  if (!isOpen || !item) {
+    return null;
+  }
+
   return (
-    <div className={`modal ${item ? "modal_opened" : ""}`}>
+    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content-image">
         <button className="modal__close modal__close_type_image" onClick={onClose}>
         </button>
