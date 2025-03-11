@@ -24,7 +24,6 @@
 }
 
 .header__add-clothes-btn {
-  margin-left: auto;
   font-weight: 700;
   font-size: 18px;
   color: rgba(0, 0, 0, 1);
@@ -90,9 +89,11 @@
 }
 
 .header__menu-username {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   margin: 10px 0;
+  color: #000;
+
 }
 
 .header__menu-date {
@@ -117,6 +118,19 @@
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.header__menu-list button:hover {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.header__menu-list button:active {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.header__profile-link {
+  text-decoration: none;
+  color: #000;
 }
 
 @media (max-width: 768px) {

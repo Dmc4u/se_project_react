@@ -10,7 +10,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData, API_KEY } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
-import { defaultClothingItems } from "../../utils/constants";
+import { getItems, addItem, deleteItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -21,7 +21,7 @@ function App() {
     isDay: true,
   });
 
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -30,19 +30,44 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
+  // Fetch weather data on mount
   useEffect(() => {
     const location = "Hadera, Israel"; // Default location
     getWeather(location, API_KEY)
       .then((data) => {
-        console.log("Weather API Response:", data);
         setWeatherData(filterWeatherData(data));
       })
       .catch(console.error);
   }, []);
 
+  // Fetch clothing items from the server
   useEffect(() => {
-    setClothingItems(defaultClothingItems);
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch(console.error);
   }, []);
+
+  // Add new item handler
+  const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
+    const newItem = { name, imageUrl, weather };
+    addItem(newItem)
+      .then((addedItem) => {
+        setClothingItems((prevItems) => [addedItem, ...prevItems]);
+        handleModalClose();
+      })
+      .catch(console.error);
+  };
+
+  // Delete item handler
+  const handleDeleteItem = (id) => {
+    deleteItem(id)
+      .then(() => {
+        setClothingItems((prevItems) => prevItems.filter(item => item._id !== id));
+      })
+      .catch(console.error);
+  };
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -55,14 +80,6 @@ function App() {
 
   const handleModalClose = () => {
     setActiveModal("");
-  };
-
-  const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
-    setClothingItems((prevItems) => [
-      { name, link: imageUrl, weather },
-      ...prevItems,
-    ]);
-    handleModalClose();
   };
 
   return (
@@ -79,13 +96,22 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Main weatherData={weatherData} onCardClick={handleCardClick} clothingItems={clothingItems} />} />
-            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems} />} />
           </Routes>
 
           <Footer />
 
-          <AddItemModal isOpen={activeModal === "add-garment"} onAddItem={handleAddItemSubmit} onClose={handleModalClose} />
-          <ItemModal isOpen={activeModal === "preview"} item={selectedCard} onClose={handleModalClose} />
+          <AddItemModal 
+            isOpen={activeModal === "add-garment"} 
+            onAddItem={handleAddItemSubmit} 
+            onClose={handleModalClose} 
+          />
+          <ItemModal 
+            isOpen={activeModal === "preview"} 
+            item={selectedCard} 
+            onClose={handleModalClose} 
+            onDeleteItem={handleDeleteItem} // Add delete functionality to the modal
+          />
         </div>
       </div>
     </CurrentTemperatureUnitContext.Provider>
