@@ -68,6 +68,23 @@
   margin-bottom: 32px;
 }
 
+.modal__delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.modal__delete-btn:hover {
+  background-color: darkred;
+}
+
+
+
 @media (max-width: 768px) {
   .modal__content {
     max-width: 90%;

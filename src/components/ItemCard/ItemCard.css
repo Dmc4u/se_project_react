@@ -63,15 +63,15 @@
     white-space: nowrap;
 }
 
-  /* .cards__item-image {
+   .cards__item-image {
     width: 328px;
     height: 328px;
     object-fit: cover;
-  } */
+  } 
 
-  .cards__item-image {
+  /* .cards__item-image {
     width: 100px;
     height: auto;
     display: block;
-  }
+  } */
   

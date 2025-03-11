@@ -6,6 +6,9 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 function Main({ weatherData, onCardClick, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
+  const filteredItems = clothingItems.filter((card) => card.weather === weatherData.type);
+
+
   return (
     <div className="main">
       <p className="cards__text">
@@ -13,9 +16,11 @@ function Main({ weatherData, onCardClick, clothingItems }) {
         {currentTemperatureUnit} / You may want to wear:
       </p>
       <ul className="cards__list">
-        {clothingItems.filter((card) => card.weather === weatherData.type).map((item) => (
-          <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
-        )) || (
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item) => (
+            <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
+          ))
+        ) : (
           <p>No suitable clothing items found.</p>
         )}
       </ul>

@@ -2,7 +2,7 @@ import React from "react";
 import "./ItemCard.css";
 
 function ItemCard({ item, onCardClick, onDeleteItem }) {
- 
+  console.log("Item Link:", item.link); // Debugging: Ensure URL is correct
 
   return (
     <li className="cards__item">
@@ -13,7 +13,7 @@ function ItemCard({ item, onCardClick, onDeleteItem }) {
         className="cards__item-image"
         onClick={() => onCardClick(item)}
       />
-       <button className="cards__delete-btn" onClick={() => onDeleteItem(item._id)}>
+      <button className="cards__delete-btn" onClick={() => onDeleteItem(item._id)}>
         Delete
       </button>
     </li>
