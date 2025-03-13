@@ -6,6 +6,7 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import DeleteConfirmationModal from "../DeleteComfirmationModal/DeleteComfirmationModal";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData, API_KEY } from "../../utils/weatherApi";
@@ -24,35 +25,27 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [cardToDelete, setCardToDelete] = useState(null);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
-  // Fetch weather data on mount
   useEffect(() => {
-    const location = "Hadera, Israel"; // Default location
-    getWeather(location, API_KEY)
-      .then((data) => {
-        setWeatherData(filterWeatherData(data));
-      })
+    getWeather("Hadera, Israel", API_KEY)
+      .then((data) => setWeatherData(filterWeatherData(data)))
       .catch(console.error);
   }, []);
 
-  // Fetch clothing items from the server
   useEffect(() => {
     getItems()
-      .then((data) => {
-        setClothingItems(data);
-      })
+      .then(setClothingItems)
       .catch(console.error);
   }, []);
 
-  // Add new item handler
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
-    const newItem = { name, imageUrl, weather };
-    addItem(newItem)
+    addItem({ name, imageUrl, weather })
       .then((addedItem) => {
         setClothingItems((prevItems) => [addedItem, ...prevItems]);
         handleModalClose();
@@ -60,11 +53,11 @@ function App() {
       .catch(console.error);
   };
 
-  // Delete item handler
   const handleDeleteItem = (id) => {
     deleteItem(id)
       .then(() => {
         setClothingItems((prevItems) => prevItems.filter(item => item._id !== id));
+        handleModalClose();
       })
       .catch(console.error);
   };
@@ -78,8 +71,22 @@ function App() {
     setActiveModal("preview");
   };
 
+  const openConfirmationModal = (card) => {
+    setCardToDelete(card);
+    setActiveModal("confirm-delete");
+  };
+
+  const handleCardDelete = () => {
+    if (cardToDelete) {
+      handleDeleteItem(cardToDelete._id);
+      setCardToDelete(null);
+      setActiveModal("");
+    }
+  };
+
   const handleModalClose = () => {
     setActiveModal("");
+    setCardToDelete(null);
   };
 
   return (
@@ -95,8 +102,14 @@ function App() {
           />
 
           <Routes>
-            <Route path="/" element={<Main weatherData={weatherData} onCardClick={handleCardClick} clothingItems={clothingItems} />} />
-            <Route path="/profile" element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems} />} />
+            <Route 
+              path="/" 
+              element={<Main weatherData={weatherData} onCardClick={handleCardClick} clothingItems={clothingItems} />} 
+            />
+            <Route 
+              path="/profile" 
+              element={<Profile onCardClick={handleCardClick} clothingItems={clothingItems} onAddClick={handleAddClick} />} 
+            />
           </Routes>
 
           <Footer />
@@ -106,15 +119,22 @@ function App() {
             onAddItem={handleAddItemSubmit} 
             onClose={handleModalClose} 
           />
+
           <ItemModal 
             isOpen={activeModal === "preview"} 
             item={selectedCard} 
             onClose={handleModalClose} 
-            onDeleteItem={handleDeleteItem} // Add delete functionality to the modal
+            openConfirmationModal={openConfirmationModal}
+          />
+
+          <DeleteConfirmationModal
+            isOpen={activeModal === "confirm-delete"}
+            onConfirm={handleCardDelete}
+            onCancel={handleModalClose}
           />
         </div>
       </div>
-    </CurrentTemperatureUnitContext.Provider>
+    </CurrentTemperatureUnitContext.Provider> 
   );
 }
 

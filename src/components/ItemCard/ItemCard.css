@@ -1,77 +1,32 @@
-@font-face {
+ @font-face {
   src: url("../assets/yellowtail-regular.woff") format("woff");
   font-family: "Yellowtail";
 }
 
-.cards {
-    font-family: Cabinet Grotesk;
-    list-style-type: none;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-  }
-
-    .cards__text {
-        width: 330;
-        height: 25;
-        font-family: Cabinet Grotesk;
-        font-weight: 700;
-        font-size: 20px;
-        line-height: 24.8px;
-        letter-spacing: 0%;
-        padding: 0;
-        margin: 40px auto;
-
-    }
-
-
-  .cards__item {
-    position: relative; /* Allows absolute positioning of the title */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 12px;
-    background: #f5f5f5; /* Match background with Figma */
-    padding: 16px;
-    
+.cards__item {
+  width: 325px;
+  height: 328px;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
-
 
 .cards__item-title {
-    position: absolute;
-    top: 17px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgba(255, 255, 255, 1); /* Solid white background */
-    width: 73px; /* Exact width */
-    height: 24px; /* Exact height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px; /* Rounded corners */
-    font-family: Cabinet Grotesk;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0%;
-    color: #000; /* Dark text for contrast */
-    text-align: center;
-    white-space: nowrap;
+  position: absolute;
+  top: 15px;
+  margin: 0;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 1);
+  padding: 2px 12px;
 }
 
-   .cards__item-image {
-    width: 328px;
-    height: 328px;
-    object-fit: cover;
-  } 
-
-  /* .cards__item-image {
-    width: 100px;
-    height: auto;
-    display: block;
-  } */
-  
+.cards__item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}

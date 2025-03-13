@@ -1,6 +1,6 @@
 .toggle-switch {
   position: relative;
-  margin-left: auto; 
+  margin-left: auto;
   max-width: 56px;
   width: 100%;
   height: 28px;
@@ -14,65 +14,76 @@
 }
 
 .toggle-switch__checkbox {
-    opacity: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    z-index: 2;
-} 
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+}
 
 .toggle-switch__circle {
-    background: #000;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    position: absolute;
-    left: 0;
-    transition: transform 0.4s ease-in-out;
-     /* mix-blend-mode: difference;  */
+  background: #000;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  transition: transform 0.4s ease-in-out;
 }
 
 .toggle-switch__text {
-    font-family: Cabinet Grotesk;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 17px;
-    color: gray;
-    text-align: center;
-    position: absolute;
-    top: 5px;
-    z-index: 1;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+  color: gray;
+  text-align: center;
+  position: absolute;
+  top: 5px;
+  z-index: 1;
 }
 
 .toggle-switch__text__F {
-    left: 8px;
+  left: 8px;
 }
 
 .toggle-switch__text__C {
-    right: 8px;
+  right: 8px;
 }
 
-/* Move Circle when Checked */
-.toggle-switch__checkbox:checked + .toggle-switch__circle {
-    transform: translateX(3px);
-    
-  }
-
-  .toggle-switch__checkbox:not(:checkek) + .toggle-switch__circle {
-    transform: translateY(14px);
-  }
+.toggle-switch__checkbox:not(:checkek) + .toggle-switch__circle {
+  transform: translateY(14px);
+}
 
 .toggle-switch__checkbox:checked + .toggle-switch__circle {
-    left: 28px;
+  left: 28px;
 }
 
 .toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text__F {
-    color: white;
-} 
-
-.toggle-switch__checkbox:checked ~ .toggle-switch__text__C {
-    color: white;
+  color: white;
 }
 
+.toggle-switch__checkbox:checked ~ .toggle-switch__text__C {
+  color: white;
+}
 
+.toggle-switch__center {
+  margin: 10px auto;
+}
+
+@media (max-width: 768px) {
+  /* .toggle-switch {
+        max-width: 40px;
+        height: 24px;
+      
+    } */
+
+  .toggle-switch__text__F {
+    left: 4px;
+  }
+
+  .toggle-switch__text__C {
+    right: 4px;
+  }
+}

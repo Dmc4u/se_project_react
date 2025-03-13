@@ -6,13 +6,15 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 function Main({ weatherData, onCardClick, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
-  const filteredItems = clothingItems.filter((card) => card.weather === weatherData.type);
-
+  const filteredItems = clothingItems.filter(
+    (card) => card.weather === weatherData.type
+  );
 
   return (
     <div className="main">
       <p className="cards__text">
-        Today in {weatherData.city}, it is {weatherData.temperature[currentTemperatureUnit]}°
+        Today in {weatherData.city}, it is{" "}
+        {weatherData.temperature[currentTemperatureUnit]}°
         {currentTemperatureUnit} / You may want to wear:
       </p>
       <ul className="cards__list">

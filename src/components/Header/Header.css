@@ -61,6 +61,7 @@
   font-weight: 700;
   color: rgba(0, 0, 0, 1);
   cursor: pointer;
+  visibility: hidden;
 }
 
 .nav-open {
@@ -136,6 +137,7 @@
 @media (max-width: 768px) {
   .header__menu-btn {
     display: block;
+    visibility: visible;
   }
 
   .header__add-clothes-btn, .header__user-container, .header__date-and-location {
