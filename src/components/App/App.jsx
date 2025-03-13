@@ -7,7 +7,6 @@ import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
 import DeleteConfirmationModal from "../DeleteComfirmationModal/DeleteComfirmationModal";
-import WeatherCard from "../WeatherCard/WeatherCard";
 import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData, API_KEY } from "../../utils/weatherApi";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnitContext";
@@ -95,11 +94,6 @@ function App() {
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
 
-          <WeatherCard 
-            temperature={weatherData.temperature} 
-            condition={weatherData.condition} 
-            isDay={weatherData.isDay} 
-          />
 
           <Routes>
             <Route 

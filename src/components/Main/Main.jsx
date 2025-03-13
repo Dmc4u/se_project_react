@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
+import WeatherCard from "../WeatherCard/WeatherCard";  // Add this import
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnitContext";
 
 function Main({ weatherData, onCardClick, clothingItems }) {
@@ -12,6 +13,11 @@ function Main({ weatherData, onCardClick, clothingItems }) {
 
   return (
     <div className="main">
+      <WeatherCard 
+        temperature={weatherData.temperature} 
+        condition={weatherData.condition} 
+        isDay={weatherData.isDay} 
+      />
       <p className="cards__text">
         Today in {weatherData.city}, it is{" "}
         {weatherData.temperature[currentTemperatureUnit]}°
