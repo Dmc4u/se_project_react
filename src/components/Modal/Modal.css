@@ -1,4 +1,4 @@
-/* .modal {
+.modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -14,62 +14,62 @@
   z-index: 10;
   box-sizing: border-box;
 }
-
-.modal_opened {
-  visibility: visible;
-  opacity: 1;
-}
-
-.modal__close {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background-image: url(../../assets/Close-Icon-black.svg);
-
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  border: none;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.modal__close:hover {
-  opacity: 1;
-}
-
-.modal__content {
-  max-width: 496px;
-  width: 100%;
-  min-height: 436px;
-  position: relative;
-  background: rgba(255, 255, 255, 1);
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 34px 36px;
-  transform: scale(0.9);
-  transition: transform 0.3s linear;
-}
-
-.modal_opened .modal__content {
-  transform: scale(1);
-}
-
-.modal__title {
-  color: rgba(0, 0, 0, 1);
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  margin: 0;
-}
-
+  
+  .modal_opened {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+   .modal__content {
+    max-width: 496px;
+    width: 100%;
+    min-height: 436px;
+    position: relative;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 34px 36px;
+    transform: scale(0.9);
+    transition: transform 0.3s linear;
+  } 
+  
+  .modal_opened .modal__content {
+    transform: scale(1);
+  }
+  
+   .modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    background: url(../../assets/Close-Icon-black.svg) no-repeat center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  } 
+  
+  .modal__close:hover {
+    opacity: 1;
+  }
+  
+  .modal__title {
+    color: rgba(0, 0, 0, 1);
+    font-family: "Cabinet Grotesk", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 0;
+  }
+  
+  
 .modal__form {
   margin-top: 27px;
   position: relative;
 }
 
+ 
 .modal__label {
   position: relative;
   display: block;
@@ -79,6 +79,9 @@
   line-height: 20px;
   margin-bottom: 24px;
 }
+
+ 
+
 
 .modal__input {
   width: 100%;
@@ -92,6 +95,12 @@
   font-family: "Cabinet Grotesk", sans-serif;
 }
 
+  .modal__input:last-of-type {
+    margin-bottom: 0;
+    margin-top: 8px;
+  }
+
+   
 .modal__label-title {
   font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 500;
@@ -100,6 +109,7 @@
   color: rgba(0, 0, 0, 1);
   margin-top: 24px;
 }
+
 
 .modal__radio-buttons {
   border: none;
@@ -111,13 +121,14 @@
 .modal__input.modal__input_type_radio {
   border: none;
 }
+ 
 
 .modal__input_type_radio {
   display: flex;
   align-items: center;
   gap: 11px;
 }
-
+ 
 .modal__submit {
   width: 100%;
   max-width: 124px;
@@ -139,17 +150,17 @@
   cursor: pointer;
   opacity: 1;
 }
-
+ 
 .modal__submit:hover {
   background: #1e5aba;
 }
 
+
 .modal__delete {
   width: 100%;
+} 
 
-}
-
-.modal__content_delete {
+.modal__content-delete {
   max-width: 670px;
   width: 100%;
   min-height: 280px;
@@ -161,6 +172,21 @@
   transition: transform 0.3s linear;
 }
 
+.modal__close_type_delete {
+  width: 14px;
+  height: 14px;
+  position: absolute;
+  top: -36px;
+  right: -36px;
+  background-image: url(../../assets/Close-Icon-white.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease-in-out;
+} 
+
+ 
 .modal__delete_type_warning {
   display: flex;
   flex-direction: column;
@@ -170,8 +196,9 @@
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 1);
-  margin: 0;
+  margin-top: 24px;
 }
+
 
 .modal__buttons-delete {
   display: flex;
@@ -182,7 +209,8 @@
   margin-top: 24px;
   padding: 0;
 }
-
+  
+ 
 .modal__button_confirm {
   width: 100%;
   max-width: 138px;
@@ -208,6 +236,7 @@
   color: white;
 }
 
+
 .modal__button_cancel {
   color: black;
   font-family: "Cabinet Grotesk", sans-serif;
@@ -218,8 +247,89 @@
   border: none;
 }
 
+
 .modal__button_cancel:hover {
   text-decoration: underline;
+} 
+
+/* ItemModal */
+
+.modal__close_type_image {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-image: url(../../assets/Close-Icon-white.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal__close:hover {
+  opacity: 1;
+}
+
+ .modal__content-image {
+  max-width: 496px;
+  width: 100%;
+  min-height: 610px;
+  position: relative;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 10px;
+  box-sizing: border-box;
+  transform: scale(0.9);
+  transition: transform 0.3s linear;
+} 
+
+.modal__image {
+  max-width: 498px;
+  max-height: 498px;
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
+
+.modal__info {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.modal__title-image {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  margin-left: 32px;
+}
+
+ 
+.modal__weather {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  margin-left: 32px;
+  margin-bottom: 32px;
+}
+
+
+.modal__delete-text {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ff0000;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 @media (max-width: 768px) {
@@ -227,13 +337,18 @@
     max-width: 90%;
     padding: 20px;
   }
-
+ 
   .modal__title {
     font-size: 18px;
   }
-
+ 
   .modal__submit {
     font-size: 18px;
     height: 40px;
   }
-} */
+}
+
+  
+
+  
+  

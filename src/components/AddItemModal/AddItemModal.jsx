@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import "./AddItemModal.css";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   // Declare state for each input field
   const [name, setName] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
+  const [isLoading, setIsLoading] = useState(false); // ✅ Add loading state
 
   // Reset the input field state to empty strings when the modal is opened
   useEffect(() => {
@@ -17,28 +17,22 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
     }
   }, [isOpen]);
 
-  // Create onChange handlers
-  const handleNameChange = (e) => setName(e.target.value);
-  const handleImageUrlChange = (e) => setImageUrl(e.target.value);
-  const handleWeatherChange = (e) => setWeather(e.target.value);
-
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
-    // Empty the input fields
-    setName("");
-    setImageUrl("");
-    setWeather("");
+    setIsLoading(true); // ✅ Start loading
+    onAddItem({ name, imageUrl, weather })
+      .finally(() => setIsLoading(false)); // ✅ Stop loading after request
   };
 
   return (
     <ModalWithForm
       title="New Garment"
-      buttonText="Add Garment"
+      buttonText={isLoading ? "Saving..." : "Add Garment"} // ✅ Show loading text
       activeModal={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isDisabled={isLoading} // ✅ Disable button while loading
     >
       <label htmlFor="name" className="modal__label">
         Name
@@ -48,9 +42,10 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           id="name"
           name="name"
           value={name}
-          onChange={handleNameChange}
+          onChange={(e) => setName(e.target.value)}
           placeholder="Name"
           required
+          disabled={isLoading} // ✅ Disable input while loading
         />
       </label>
       <label htmlFor="imageUrl" className="modal__label">
@@ -61,53 +56,30 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           id="imageUrl"
           name="imageUrl"
           value={imageUrl}
-          onChange={handleImageUrlChange}
+          onChange={(e) => setImageUrl(e.target.value)}
           placeholder="Image URL"
           required
+          disabled={isLoading} // ✅ Disable input while loading
         />
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__label-title">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__input modal__input_type_radio">
-          <input
-            id="hot"
-            type="radio"
-            name="weather"
-            className="modal__radio-input"
-            value="hot"
-            checked={weather === "hot"}
-            onChange={handleWeatherChange}
-            required
-          />
-          Hot
-        </label>
-        <label htmlFor="warm" className="modal__input modal__input_type_radio">
-          <input
-            id="warm"
-            type="radio"
-            name="weather"
-            className="modal__radio-input"
-            value="warm"
-            checked={weather === "warm"}
-            onChange={handleWeatherChange}
-            required
-          />
-          Warm
-        </label>
-        <label htmlFor="cold" className="modal__input modal__input_type_radio">
-          <input
-            id="cold"
-            type="radio"
-            name="weather"
-            className="modal__radio-input"
-            value="cold"
-            checked={weather === "cold"}
-            onChange={handleWeatherChange}
-            required
-          />
-          Cold
-        </label>
-      </fieldset> 
+        {["hot", "warm", "cold"].map((type) => (
+          <label key={type} className="modal__input modal__input_type_radio">
+            <input
+              type="radio"
+              name="weather"
+              className="modal__radio-input"
+              value={type}
+              checked={weather === type}
+              onChange={(e) => setWeather(e.target.value)}
+              required
+              disabled={isLoading} // ✅ Disable input while loading
+            />
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </label>
+        ))}
+      </fieldset>
     </ModalWithForm>
   );
 };

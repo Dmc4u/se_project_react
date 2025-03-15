@@ -1,18 +1,16 @@
-import React from "react";
-import "./ModalWithForm.css";
+import Modal from '../Modal/Modal';
 
-function ModalWithForm({ title, children, buttonText, activeModal, onClose, onSubmit }) {
+function ModalWithForm({ isOpen, name, onClose, title, children, buttonText, onSubmit, isDisabled }) {
   return (
-    <div className={`modal ${activeModal ? "modal_opened" : ""}`}>
-      <div className="modal__content">
-        <button className="modal__close" onClick={onClose} />
-        <h2 className="modal__title">{title}</h2>
-        <form onSubmit={onSubmit} className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">{buttonText}</button>
-        </form>
-      </div>
-    </div>
+    <Modal isOpen={isOpen} name={name} onClose={onClose}>
+      <h2 className="modal__title">{title}</h2>
+      <form onSubmit={onSubmit} className="modal__form">
+        {children}
+        <button type="submit" className="modal__submit" disabled={isDisabled}>
+          {buttonText}
+        </button>
+      </form>
+    </Modal>
   );
 }
 

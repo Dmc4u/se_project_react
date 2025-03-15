@@ -12,7 +12,7 @@ function Main({ weatherData, onCardClick, clothingItems }) {
   );
 
   return (
-    <div className="main">
+    <main className="main">
       <WeatherCard 
         temperature={weatherData.temperature} 
         condition={weatherData.condition} 
@@ -32,7 +32,7 @@ function Main({ weatherData, onCardClick, clothingItems }) {
           <p>No suitable clothing items found.</p>
         )}
       </ul>
-    </div>
+    </main>
   );
 }
 

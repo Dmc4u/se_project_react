@@ -1,4 +1,4 @@
-import "./ClothesSection.css";
+import "./ClothesSection.css"; 
 import ItemCard from "../ItemCard/ItemCard";
 
 function ClothesSection({ onCardClick, clothingItems, onAddClick }) {
@@ -6,7 +6,10 @@ function ClothesSection({ onCardClick, clothingItems, onAddClick }) {
     <div className="clothes-section">
       <div className="clothes-section__header">
         <p className="clothes-section__title">Your Items</p>
-        <button className="clothes-section__add-btn" onClick={onAddClick}>
+        <button
+          className="clothes-section__add-btn modal__button"
+          onClick={onAddClick}
+        >
           + Add New
         </button>
       </div>

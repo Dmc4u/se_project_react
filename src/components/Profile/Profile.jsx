@@ -5,9 +5,15 @@ import ClothesSection from "../ClothesSection/ClothesSection";
 function Profile({ onCardClick, clothingItems, onAddClick }) {
   return (
     <div className="profile">
-      <section className="profile__sidebar">{<SideBar />}</section>
+      <section className="profile__sidebar">
+        <SideBar />
+      </section>
       <section className="profile__clothes-items">
-        {<ClothesSection onCardClick={onCardClick} clothingItems={clothingItems} onAddClick={onAddClick} />}
+        <ClothesSection
+          onCardClick={onCardClick}
+          clothingItems={clothingItems}
+          onAddClick={onAddClick}
+        />
       </section>
     </div>
   );
