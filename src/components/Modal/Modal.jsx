@@ -21,14 +21,12 @@ function Modal({ isOpen, onClose, name, children }) {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className={`modal modal_type_${name} modal_opened`} onClick={handleOverlayClick}>
-      <div className="modal__content">
-        <button className="modal__close" onClick={onClose} />
-        {children}
-      </div>
+    <div
+      className={`modal modal_type_${name} ${isOpen ? "modal_opened" : ""}`}
+      onClick={handleOverlayClick}
+    >
+      {children}
     </div>
   );
 }

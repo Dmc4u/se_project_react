@@ -8,7 +8,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const [weather, setWeather] = useState("");
   const [isLoading, setIsLoading] = useState(false); // ✅ Add loading state
 
-  // Reset the input field state to empty strings when the modal is opened
+  // Reset the input fields when the modal is opened
   useEffect(() => {
     if (isOpen) {
       setName("");
@@ -27,9 +27,9 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
 
   return (
     <ModalWithForm
+      isOpen={isOpen} // ✅ Ensure this prop is passed
       title="New Garment"
       buttonText={isLoading ? "Saving..." : "Add Garment"} // ✅ Show loading text
-      activeModal={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
       isDisabled={isLoading} // ✅ Disable button while loading
