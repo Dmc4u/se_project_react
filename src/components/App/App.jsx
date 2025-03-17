@@ -64,9 +64,7 @@ function App() {
 
 
   const handleAddClick = () => {
-  
     setActiveModal((prev) => {
-     
       return "add-garment";
     });
   };

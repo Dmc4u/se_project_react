@@ -12,9 +12,9 @@
 }
 
 .header__date-and-location {
-  font-family: 'Cabinet Grotesk', sans-serif;
+  font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   color: rgba(0, 0, 0, 1);
   margin: 0;
 }
@@ -94,7 +94,6 @@
   font-weight: 700;
   margin: 10px 0;
   color: #000;
-
 }
 
 .header__menu-date {
@@ -135,17 +134,73 @@
 }
 
 @media (max-width: 768px) {
+  .header {
+    justify-content: space-between;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+  .nav-open {
+    width: 65vw;
+    top: 60px;
+    right: 0;
+    left: 0;
+    background: white; /* Or any preferred background */
+    box-shadow: none; /* Remove small box shadow */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    z-index: 100;
+    padding: 60px auto 40px;
+  }
+
+  .modal__close_type_nav {
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    width: 22px;
+    height: 22px;
+    background: url(../../assets/close-icon-black.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .header__user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .header__menu-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header__menu-username {
+    font-size: 18px;
+  }
+
   .header__menu-btn {
     display: block;
     visibility: visible;
   }
 
-  .header__add-clothes-btn, .header__user-container, .header__date-and-location {
+  .header__toggle-switch {
     display: none;
   }
 
-  .nav-open {
-    top: 60px;
-    right: 10px;
+  .header__add-clothes-btn,
+  .header__user-container {
+    display: none;
+  }
+  .nav-open .toggle-switch__center {
+    display: block;
   }
 }

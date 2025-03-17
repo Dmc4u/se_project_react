@@ -70,14 +70,19 @@
 
 .toggle-switch__center {
   margin: 10px auto;
+  display: block;
 }
 
 @media (max-width: 768px) {
-  /* .toggle-switch {
-        max-width: 40px;
-        height: 24px;
-      
-    } */
+  .toggle-switch {
+    max-width: 48px;
+    display: none;
+  }
+
+  .toggle-switch__text {
+    font-size: 12px;
+    line-height: 15px;
+  }
 
   .toggle-switch__text__F {
     left: 4px;

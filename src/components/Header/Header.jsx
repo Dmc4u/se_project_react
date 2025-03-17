@@ -46,32 +46,32 @@ function Header({ handleAddClick, weatherData }) {
       <button onClick={toggleMobileMenu} className="header__menu-btn">
         {isMobileMenuOpened ? "Close" : "Menu"}
       </button>
-
       {isMobileMenuOpened && (
-        <nav className="nav-open">
-          <div className="header__menu-content">
-            <p className="header__menu-date">
-              {currentDate}, {weatherData.city || "Loading..."}
-            </p>
-            <img src={avatar} alt="User Avatar" className="header__menu-avatar" />
-            <ToggleSwitch className="toggle-switch__center" />
-            <p className="header__menu-username">Terrence Tegegne</p>
-            <ul className="header__menu-list">
-              <li>
-                <button
-                  onClick={() => {
-                    handleAddClick();
-                    setIsMobileMenuOpened(false);
-                  }}
-                  className="modal__button"
-                >
-                  + Add Clothes
-                </button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      )}
+  <nav className="nav-open">
+    <div className="header__menu-content">
+    <button className="modal__close_type_nav"  onClick={() => setIsMobileMenuOpened(false)} ></button>
+      <div className="header__user">
+    <p className="header__menu-username">Terrence Tegegne</p>
+      <img src={avatar} alt="User Avatar" className="header__menu-avatar" />
+      </div>
+      <ul className="header__menu-list">
+        <li>
+          <button
+            onClick={() => {
+              handleAddClick();
+              setIsMobileMenuOpened(false);
+            }}
+            className="modal__button"
+          >
+            + Add Clothes
+          </button>
+        </li>
+      </ul>
+      <ToggleSwitch className="toggle-switch__center" />
+    </div>
+  </nav>
+)}
+
     </header>
   );
 }
