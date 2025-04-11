@@ -34,6 +34,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log(getItems);
     getItems().then(setClothingItems).catch(console.error);
   }, []);
 
