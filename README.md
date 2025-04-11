@@ -20,6 +20,8 @@ This project was built with React, Vite, and styled using CSS. It includes respo
 
 Developed by Moses Ademola Aina, based on a project by **Elise Bouer**.
 
+Backend: https://github.com/Dmc4u/se_project_express
+
 
 | [Visit WTWR (What To Wear)](https://dmc4u.github.io/se_project_react/) |
 
