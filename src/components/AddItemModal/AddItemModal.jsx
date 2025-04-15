@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { isValidUrl, isNonEmptyString } from "../../utils/validation"; // Import validation functions
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   // Declare state for each input field
@@ -7,6 +8,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
   const [imageUrl, setImageUrl] = useState("");
   const [weather, setWeather] = useState("");
   const [isLoading, setIsLoading] = useState(false); // ✅ Add loading state
+  const [error, setError] = useState(""); // ✅ Add error state for validation
 
   // Reset the input fields when the modal is opened
   useEffect(() => {
@@ -14,14 +16,38 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       setName("");
       setImageUrl("");
       setWeather("");
+      setError(""); // Reset error state
     }
   }, [isOpen]);
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate inputs
+    if (!isNonEmptyString(name)) {
+      setError("Name must be between 2 and 30 characters.");
+      return;
+    }
+    if (!isValidUrl(imageUrl)) {
+      setError("Please enter a valid image URL.");
+      return;
+    }
+    if (!weather) {
+      setError("Please select a weather type.");
+      return;
+    }
+
+    setError(""); // Clear error state if validation passes
     setIsLoading(true); // ✅ Start loading
+
     onAddItem({ name, imageUrl, weather })
+      .then(() => {
+        onClose(); // ✅ Close the modal after successful save
+      })
+      .catch(() => {
+        setError("An error occurred while saving. Please try again."); // Handle save failure
+      })
       .finally(() => setIsLoading(false)); // ✅ Stop loading after request
   };
 
@@ -80,6 +106,9 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           </label>
         ))}
       </fieldset>
+
+      {/* Display validation error messages */}
+      {error && <p className="modal__error">{error}</p>}
     </ModalWithForm>
   );
 };

@@ -10,10 +10,10 @@ import DeleteConfirmationModal from "../DeleteComfirmationModal/DeleteComfirmati
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
-import { getWeather, filterWeatherData, API_KEY } from "../../utils/weatherApi";
 import CurrentUserContext from "../../utils/CurrentUserContext";
 import CurrentTemperatureUnitContext from "../../utils/CurrentTemperatureUnitContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import { getWeather, filterWeatherData, API_KEY } from "../../utils/weatherApi";
 
 import {
   getItems,
@@ -224,6 +224,26 @@ function App() {
                       onSignOut={handleLogout}
                     />
                   </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/login"
+                element={
+                  <LoginModal
+                    isOpen={activeModal === "login"}
+                    onLogin={handleLogin}
+                    onClose={handleModalClose}
+                  />
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <RegisterModal
+                    isOpen={activeModal === "register"}
+                    onRegister={handleRegister}
+                    onClose={handleModalClose}
+                  />
                 }
               />
             </Routes>

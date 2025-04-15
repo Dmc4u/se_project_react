@@ -10,7 +10,12 @@ function checkResponse(res) {
 
 // General request function
 function request(url, options) {
-  return fetch(url, options).then(checkResponse);
+  return fetch(url, options)
+    .then(checkResponse)
+    .catch((err) => {
+      console.error(`Request failed: ${err}`);
+      throw err;
+    });
 }
 
 // GET: Fetch all clothing items
@@ -55,7 +60,7 @@ function updateUser({ name, avatar }) {
 // PUT: Add a like to an item
 function addCardLike(id, token) {
   return request(`${baseUrl}/items/${id}/likes`, {
-    method: "PUT",
+    method: 'PUT',
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -65,7 +70,7 @@ function addCardLike(id, token) {
 // DELETE: Remove a like from an item
 function removeCardLike(id, token) {
   return request(`${baseUrl}/items/${id}/likes`, {
-    method: "DELETE",
+    method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
     },

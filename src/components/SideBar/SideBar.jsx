@@ -6,6 +6,16 @@ import CurrentUserContext from "../../utils/CurrentUserContext";
 function SideBar({ onEditProfile, onSignOut }) {
   const currentUser = useContext(CurrentUserContext);
 
+  // Function to validate the avatar URL
+  const isValidAvatarUrl = (url) => {
+    try {
+      new URL(url); // Checks if the URL is valid
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   // Function to generate a placeholder with the first letter of the user's name
   const getAvatarPlaceholder = (name) => {
     const firstLetter = name?.charAt(0).toUpperCase() || "?";
@@ -19,10 +29,10 @@ function SideBar({ onEditProfile, onSignOut }) {
   return (
     <div className="sidebar">
       <div className="sidebar__avatar-container">
-        {currentUser?.avatar ? (
+        {isValidAvatarUrl(currentUser?.avatar) ? (
           <img
             src={currentUser.avatar}
-            alt={currentUser?.name || "User Avatar"}
+            alt="Avatar" // Removed name from alt for privacy
             className="sidebar__avatar"
           />
         ) : (

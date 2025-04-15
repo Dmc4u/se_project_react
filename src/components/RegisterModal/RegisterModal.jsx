@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Modal/Modal"; // Updated import
-import "./RegisterModal.css"; // Ensure appropriate styles are included
+import { useNavigate } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import { isValidEmail, isValidUrl, isNonEmptyString } from "../../utils/validation"; // Import validation logic
 
 const RegisterModal = ({ isOpen, onRegister, onClose }) => {
   const [email, setEmail] = useState("");
@@ -8,6 +9,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose }) => {
   const [name, setName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(""); // Add error state
 
   useEffect(() => {
     if (isOpen) {
@@ -15,19 +17,40 @@ const RegisterModal = ({ isOpen, onRegister, onClose }) => {
       setPassword("");
       setName("");
       setAvatarUrl("");
+      setError(""); // Reset errors
     }
   }, [isOpen]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validate inputs before submission
+    if (!isValidEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    if (!isValidUrl(avatarUrl)) {
+      setError("Please enter a valid avatar URL.");
+      return;
+    }
+    if (!isNonEmptyString(name)) {
+      setError("Name must be between 2 and 30 characters.");
+      return;
+    }
+
     setIsLoading(true);
     onRegister({ email, password, name, avatar: avatarUrl })
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsLoading(false))
+      .catch(() => setError("Registration failed. Please try again.")); // Handle registration failure
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="register">
       <div className="modal__content-register">
+        <button
+          className="modal__close modal__close_type_register"
+          onClick={onClose}
+        ></button>
         <form className="modal__form" onSubmit={handleSubmit}>
           <h2 className="modal__title">Sign Up</h2>
           <label htmlFor="email" className="modal__label">
@@ -43,6 +66,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose }) => {
               disabled={isLoading}
             />
           </label>
+          {error && <p className="modal__error">{error}</p>} {/* Show error */}
           <label htmlFor="password" className="modal__label">
             Password*
             <input
@@ -92,12 +116,10 @@ const RegisterModal = ({ isOpen, onRegister, onClose }) => {
             </button>
             <button
               type="button"
-              className="modal__link"
-              onClick={() => {
-                console.log("Redirect to Log In");
-              }}
+              className="modal__button modal__button-secondary"
+              onClick={() => navigate("/login")}
             >
-              or Log In
+              Or Log In
             </button>
           </div>
         </form>

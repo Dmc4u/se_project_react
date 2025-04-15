@@ -48,10 +48,12 @@ function Header({ handleAddClick, weatherData, onLogin, onRegister, isLoggedIn }
           >
             + Add Clothes
           </button>
+          <Link to="/profile" className="header__profile-link">
           <div className="header__user-container">
             <p className="header__username">{currentUser?.name || "User"}</p>
             {getAvatarPlaceholder(currentUser?.name)}
           </div>
+          </Link>
         </>
       ) : (
         <div className="header__auth-container">

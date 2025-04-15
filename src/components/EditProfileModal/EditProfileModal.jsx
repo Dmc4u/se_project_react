@@ -23,6 +23,10 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} name="edit-profile">
       <div className="edit-profile__content">
+      <button
+          className="modal__close modal__close_type_edit-profile"
+          onClick={onClose}
+        ></button>
         <form className="edit-profile__form" onSubmit={handleSubmit}>
           <h2 className="edit-profile__title">Edit Profile</h2>
           <label className="edit-profile__label">
