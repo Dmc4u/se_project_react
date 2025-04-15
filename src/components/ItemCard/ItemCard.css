@@ -1,20 +1,26 @@
- @font-face {
+@font-face {
   src: url("../assets/yellowtail-regular.woff") format("woff");
   font-family: "Yellowtail";
 }
 
 .cards__item {
+  position: relative;
   width: 325px;
   height: 328px;
-  position: relative;
   display: flex;
   justify-content: center;
 }
 
-.cards__item-title {
+.card__description {
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 15px;
   margin: 0;
+  gap: 10px;
+}
+
+.cards__item-title {
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-size: 16px;
@@ -29,4 +35,27 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.cards__like-button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  width: 18px; /* Example size based on Figma design */
+  height: 15px;
+  background-color: transparent; /* Match background if it's transparent */
+  background-image: url("../../assets/like-button.svg"); /* Replace with the actual icon */
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: transform 0.2s ease; /* For hover/active effects */
+}
+
+.cards__like-button_active {
+  color: red;
+  background-image: url("../../assets/Like-Button-Active.svg"); /* Change to "liked" state icon */
+}
+
+.cards__like-button:hover {
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }

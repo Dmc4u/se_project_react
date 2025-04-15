@@ -89,6 +89,21 @@
   border-radius: 50%;
 }
 
+.header__avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: default;
+}
+
 .header__menu-username {
   font-size: 20px;
   font-weight: 700;
@@ -133,6 +148,34 @@
   color: #000;
 }
 
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #007BFF;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.header__auth-links {
+  display: flex;
+  gap: 12px;
+}
+
+.header__auth-btn {
+  font-size: 16px;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 1);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
   .header {
     justify-content: space-between;
@@ -200,6 +243,7 @@
   .header__user-container {
     display: none;
   }
+
   .nav-open .toggle-switch__center {
     display: block;
   }

@@ -6,13 +6,58 @@
   padding: 0;
   margin: 0;
 }
- 
-.sidebar__avatar {
+
+.sidebar__avatar-container {
+  position: relative;
   width: 56px;
   height: 56px;
+}
+
+.sidebar__avatar {
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+}
+
+.sidebar__avatar-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #ccc;
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.sidebar__edit-avatar-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background-image: url(../../assets/Edit-Button.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  display: none; /* Initially hidden */
+}
+
+.sidebar__avatar-container:hover .sidebar__edit-avatar-button {
+  display: block; /* Show on hover */
+}
+
+.sidebar__edit-avatar-button:hover {
+  opacity: 0.8;
 }
 
 .sidebar__username {
@@ -22,15 +67,29 @@
   line-height: 100%;
   letter-spacing: 0%;
   color: rgba(0, 0, 0, 1);
-} 
+}
+
+.sidebar__signout-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar__signout-button:hover {
+  background-color: #0056b3;
+}
 
 @media (max-width: 768px) {
   .sidebar {
-  
     justify-content: start;
     gap: 20px;
     padding: 0 20px;
-    justify-content: space-between; 
+    justify-content: space-between;
     max-width: 90%;
     margin: 0 auto;
   }
