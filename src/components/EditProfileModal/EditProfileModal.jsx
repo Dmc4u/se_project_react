@@ -1,62 +1,79 @@
-import React, { useState, useContext, useEffect } from "react";
-import Modal from "../Modal/Modal";
+import React, { useEffect, useContext } from "react";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../utils/CurrentUserContext";
-import "./EditProfileModal.css";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   useEffect(() => {
-    if (currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+    if (isOpen) {
+      resetForm(
+        {
+          name: currentUser?.name || "",
+          avatar: currentUser?.avatar || "",
+        },
+        {},
+        true
+      );
+      setError("");
     }
-  }, [currentUser, isOpen]);
+  }, [isOpen, currentUser, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onUpdateUser({ name, avatar });
+    setIsLoading(true);
+
+    onUpdateUser({ name: values.name, avatar: values.avatar })
+      .then(() => onClose())
+      .catch(() => setError("An error occurred. Please try again."))
+      .finally(() => setIsLoading(false));
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} name="edit-profile">
-      <div className="edit-profile__content">
-      <button
-          className="modal__close modal__close_type_edit-profile"
-          onClick={onClose}
-        ></button>
-        <form className="edit-profile__form" onSubmit={handleSubmit}>
-          <h2 className="edit-profile__title">Edit Profile</h2>
-          <label className="edit-profile__label">
-            Name
-            <input
-              type="text"
-              className="edit-profile__input"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
-              required
-            />
-          </label>
-          <label className="edit-profile__label">
-            Avatar URL
-            <input
-              type="url"
-              className="edit-profile__input"
-              value={avatar}
-              onChange={(e) => setAvatar(e.target.value)}
-              placeholder="Enter avatar URL"
-              required
-            />
-          </label>
-          <button type="submit" className="edit-profile__button">
-            Save
-          </button>
-        </form>
-      </div>
-    </Modal>
+    <ModalWithForm
+      isOpen={isOpen}
+      title="Change profile data"
+      buttonText={isLoading ? "Saving..." : "Save changes"}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      isDisabled={!isValid || isLoading} // Disable button if form is invalid or loading
+    >
+      <label htmlFor="edit-profile-name" className="modal__label">
+        Name *
+        <input
+          type="text"
+          id="edit-profile-name"
+          name="name"
+          value={values.name || ""}
+          onChange={handleChange}
+          className="modal__input"
+          placeholder="Name"
+          required
+          disabled={isLoading}
+        />
+        {errors.name && <span className="modal__error">{errors.name}</span>}
+      </label>
+      <label htmlFor="edit-profile-avatar" className="modal__label">
+        Avatar *
+        <input
+          type="url"
+          id="edit-profile-avatar"
+          name="avatar"
+          value={values.avatar || ""}
+          onChange={handleChange}
+          className="modal__input"
+          placeholder="Avatar URL"
+          required
+          disabled={isLoading}
+        />
+        {errors.avatar && <span className="modal__error">{errors.avatar}</span>}
+      </label>
+      {error && <p className="modal__error">{error}</p>}
+    </ModalWithForm>
   );
 }
 

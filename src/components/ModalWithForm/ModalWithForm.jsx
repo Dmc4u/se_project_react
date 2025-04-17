@@ -1,5 +1,4 @@
 import Modal from "../Modal/Modal";
-import "./ModalWithForm.css";
 
 function ModalWithForm({ isOpen, name, onClose, title, children, buttonText, onSubmit, isDisabled }) {
   return (

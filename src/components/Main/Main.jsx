@@ -29,7 +29,7 @@ function Main({ weatherData, onCardClick, clothingItems, onCardLike }) {
               key={item._id}
               item={item}
               onCardClick={onCardClick}
-              onCardLike={onCardLike} // Pass handleCardLike to ItemCard
+              onCardLike={onCardLike} // Pass handleCardLike to ItemCar
             />
           ))
         ) : (

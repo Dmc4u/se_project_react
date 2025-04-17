@@ -1,92 +1,79 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { isValidUrl, isNonEmptyString } from "../../utils/validation"; // Import validation functions
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
-  // Declare state for each input field
-  const [name, setName] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
-  const [weather, setWeather] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // ✅ Add loading state
-  const [error, setError] = useState(""); // ✅ Add error state for validation
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  // Reset the input fields when the modal is opened
+  // Reset the form when the modal is opened
   useEffect(() => {
     if (isOpen) {
-      setName("");
-      setImageUrl("");
-      setWeather("");
-      setError(""); // Reset error state
+      resetForm();
+      setError("");
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validate inputs
-    if (!isNonEmptyString(name)) {
-      setError("Name must be between 2 and 30 characters.");
-      return;
-    }
-    if (!isValidUrl(imageUrl)) {
-      setError("Please enter a valid image URL.");
-      return;
-    }
-    if (!weather) {
-      setError("Please select a weather type.");
+    if (!isValid) {
+      setError("Please fix the validation errors.");
       return;
     }
 
     setError(""); // Clear error state if validation passes
-    setIsLoading(true); // ✅ Start loading
+    setIsLoading(true); // Start loading
 
-    onAddItem({ name, imageUrl, weather })
+    onAddItem({ name: values.name, imageUrl: values.imageUrl, weather: values.weather })
       .then(() => {
-        onClose(); // ✅ Close the modal after successful save
+        onClose(); // Close the modal after successful save
       })
       .catch(() => {
         setError("An error occurred while saving. Please try again."); // Handle save failure
       })
-      .finally(() => setIsLoading(false)); // ✅ Stop loading after request
+      .finally(() => setIsLoading(false)); // Stop loading after request
   };
 
   return (
     <ModalWithForm
-      isOpen={isOpen} // ✅ Ensure this prop is passed
+      isOpen={isOpen}
       title="New Garment"
-      buttonText={isLoading ? "Saving..." : "Add Garment"} // ✅ Show loading text
+      buttonText={isLoading ? "Saving..." : "Add Garment"}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isDisabled={isLoading} // ✅ Disable button while loading
+      isDisabled={isLoading}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="add-item-name" className="modal__label">
         Name
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="add-item-name"
           name="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={values.name || ""}
+          onChange={handleChange}
           placeholder="Name"
           required
-          disabled={isLoading} // ✅ Disable input while loading
+          disabled={isLoading}
         />
+        {errors.name && <span className="modal__error">{errors.name}</span>}
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="add-item-imageUrl" className="modal__label">
         Image
         <input
           type="url"
           className="modal__input"
-          id="imageUrl"
+          id="add-item-imageUrl"
           name="imageUrl"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
+          value={values.imageUrl || ""}
+          onChange={handleChange}
           placeholder="Image URL"
           required
-          disabled={isLoading} // ✅ Disable input while loading
+          disabled={isLoading}
         />
+        {errors.imageUrl && <span className="modal__error">{errors.imageUrl}</span>}
       </label>
       <fieldset className="modal__radio-buttons">
         <legend className="modal__label-title">Select the weather type:</legend>
@@ -95,19 +82,19 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
             <input
               type="radio"
               name="weather"
+              id={`add-item-weather-${type}`}
               className="modal__radio-input"
               value={type}
-              checked={weather === type}
-              onChange={(e) => setWeather(e.target.value)}
+              checked={values.weather === type}
+              onChange={handleChange}
               required
-              disabled={isLoading} // ✅ Disable input while loading
+              disabled={isLoading}
             />
             {type.charAt(0).toUpperCase() + type.slice(1)}
           </label>
         ))}
+        {errors.weather && <span className="modal__error">{errors.weather}</span>}
       </fieldset>
-
-      {/* Display validation error messages */}
       {error && <p className="modal__error">{error}</p>}
     </ModalWithForm>
   );

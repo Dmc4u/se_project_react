@@ -1,52 +1,31 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import "./SideBar.css";
 import CurrentUserContext from "../../utils/CurrentUserContext";
 
 function SideBar({ onEditProfile, onSignOut }) {
   const currentUser = useContext(CurrentUserContext);
 
-  // Function to validate the avatar URL
-  const isValidAvatarUrl = (url) => {
-    try {
-      new URL(url); // Checks if the URL is valid
-      return true;
-    } catch {
-      return false;
+  const renderUserAvatar = () => {
+    if (currentUser?.avatar) {
+      return <img src={currentUser.avatar} alt="User Avatar" className="sidebar__avatar" />;
     }
-  };
 
-  // Function to generate a placeholder with the first letter of the user's name
-  const getAvatarPlaceholder = (name) => {
-    const firstLetter = name?.charAt(0).toUpperCase() || "?";
-    return (
-      <div className="sidebar__avatar-placeholder">
-        {firstLetter}
-      </div>
-    );
+    const firstLetter = currentUser?.name?.charAt(0).toUpperCase() || "?";
+    return <div className="sidebar__avatar-placeholder">{firstLetter}</div>;
   };
 
   return (
     <div className="sidebar">
-      <div className="sidebar__avatar-container">
-        {isValidAvatarUrl(currentUser?.avatar) ? (
-          <img
-            src={currentUser.avatar}
-            alt="Avatar" // Removed name from alt for privacy
-            className="sidebar__avatar"
-          />
-        ) : (
-          getAvatarPlaceholder(currentUser?.name)
-        )}
-        <button
-          className="sidebar__edit-avatar-button"
-          onClick={onEditProfile}
-          aria-label="Edit Profile"
-        ></button>
-      </div>
+      <div className="sidebar__info">
+      {renderUserAvatar()}
       <p className="sidebar__username">{currentUser?.name || "User"}</p>
-      <button className="sidebar__signout-button" onClick={onSignOut}>
-        Sign Out
+      </div>
+      <button className="sidebar__edit-btn" onClick={onEditProfile}>
+        
+        Change profile data
+      </button>
+      <button className="sidebar__logout-btn" onClick={onSignOut}>
+        Log out
       </button>
     </div>
   );

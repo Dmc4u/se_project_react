@@ -23,7 +23,8 @@
 .modal__content {
   max-width: 496px;
   width: 100%;
-  min-height: 436px;
+  height: auto;
+  /* min-height: 436px; */
   position: relative;
   background: #fff;
   border-radius: 10px;
@@ -142,6 +143,45 @@
 
 .modal__submit:hover {
   background: #1e5aba;
+}
+
+
+/* Switch Text and Button */
+.modal__switch-text {
+  position: absolute;
+  bottom: -2px;
+  left: 35%;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  
+}
+
+.modal__switch-button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.modal__switch-button:hover {
+  color: #1565c0; 
+}
+
+
+.modal__error {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: red;
+  /* margin-top: 8px; */
 }
 
 /* DeleteConfirmationModal */
@@ -308,115 +348,11 @@
   cursor: pointer;
   border: none;
   background: none;
+  color: red;
 }
 
 .modal__delete-button:hover {
   text-decoration: underline;
-}
-
-/* Login */
-
-.modal__content-login {
-  max-width: 496px;
-  width: 100%;
-  position: relative;
-  background: #fff;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 34px 36px;
-  transform: scale(0.9);
-  transition: transform 0.3s linear;
-}
-
-.modal__close_type_login {
-  width: 14px;
-  height: 14px;
-  position: absolute;
-  top: 23px;
-  right: 23px;
-  background-image: url(../../assets/close-icon-black.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  border: none;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.modal__close_type_login:hover {
-  opacity: 1;
-}
-
-.modal__title-login {
-  font-family: Cabinet Grotesk;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-/* Registration */
-
-.modal__content-register {
-  max-width: 496px;
-  width: 100%;
-  position: relative;
-  background: #fff;
-  border-radius: 10px;
-  box-sizing: border-box;
-  padding: 34px 36px;
-  transform: scale(0.9);
-  transition: transform 0.3s linear;
-}
-
-.modal__close_type_register {
-  width: 14px;
-  height: 14px;
-  position: absolute;
-  top: 23px;
-  right: 23px;
-  background-image: url(../../assets/close-icon-black.svg);
-  background-repeat: no-repeat;
-  background-size: contain;
-  cursor: pointer;
-  border: none;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.modal__title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.modal__footer-register {
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  gap: 8px;
-  margin-top: 24px;
-}
-
-.modal__button_primary {
-  background: rgba(0, 0, 0, 0.3);
-  color: rgb(255, 255, 255);
-  border: none;
-}
-
-.modal__button_primary:hover {
-  background: #1e5aba;
-  cursor: pointer;
-}
-
-.modal__button-secondary {
-  background: transparent;
-  color: rgba(0, 0, 0, 0.8);
-  border: none;
-}
-
-.modal__button-secondary:hover {
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 /* Responsive Design */

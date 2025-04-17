@@ -29,7 +29,7 @@ function ClothesSection({ onCardClick, clothingItems, onAddClick, onCardLike }) 
               key={item._id}
               item={item}
               onCardClick={onCardClick}
-              onCardLike={onCardLike} // Pass handleCardLike to ItemCard
+              onCardLike={onCardLike} // Pass handleCardLike to ItemCard 
             />
           ))
         ) : (

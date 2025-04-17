@@ -1,92 +1,82 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Modal from "../Modal/Modal";
-import { isValidEmail } from "../../utils/validation"; 
+import React, { useEffect } from "react";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
-const LoginModal = ({ isOpen, onLogin, onClose }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(""); // Add error state
+const LoginModal = ({ isOpen, onLogin, onClose, onSwitchToRegister }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [error, setError] = React.useState("");
 
   useEffect(() => {
     if (isOpen) {
-      setEmail("");
-      setPassword("");
-      setError(""); // Clear errors when modal opens
+      resetForm();
+      setError("");
     }
-  }, [isOpen]);
+  }, [isOpen, resetForm]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
-    // Validate email before submission
-    if (!isValidEmail(email)) {
-      setError("Please enter a valid email address.");
+    if (!isValid) {
+      setError("Please fix the validation errors.");
+      setIsLoading(false);
       return;
     }
 
-    setIsLoading(true);
-    onLogin({ email, password })
-      .finally(() => setIsLoading(false))
-      .catch(() => setError("Login failed. Please try again.")); // Handle login failure
+    onLogin(values)
+      .then(() => onClose())
+      .catch(() => setError("Invalid email or password."))
+      .finally(() => setIsLoading(false));
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} name="login">
-      <div className="modal__content-login">
-        <button
-          className="modal__close modal__close_type_login"
-          onClick={onClose}
-        ></button>
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <h2 className="modal__title">Log In</h2>
-          <label htmlFor="email" className="modal__label">
-            Email
-            <input
-              type="email"
-              className="modal__input"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
-              required
-              disabled={isLoading}
-            />
-          </label>
-          {error && <p className="modal__error">{error}</p>} {/* Show error */}
-          <label htmlFor="password" className="modal__label">
-            Password
-            <input
-              type="password"
-              className="modal__input"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-              disabled={isLoading}
-            />
-          </label>
-          <div className="modal__footer-register">
-            <button
-              type="submit"
-              className="modal__button modal__button_primary"
-              disabled={isLoading}
-            >
-              {isLoading ? "Logging in..." : "Log In"}
-            </button>
-            <button
-              className="modal__button modal__button-secondary"
-              type="button"
-              onClick={() => navigate("/register")}
-            >
-              Or Sign Up
-            </button>
-          </div>
-        </form>
-      </div>
-    </Modal>
+    <ModalWithForm
+      isOpen={isOpen}
+      title="Log In"
+      buttonText={isLoading ? "Logging In..." : "Log In"}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      isDisabled={isLoading}
+    >
+      <label htmlFor="login-email" className="modal__label">
+        Email
+        <input
+          type="email"
+          id="login-email"
+          name="email"
+          value={values.email || ""}
+          onChange={handleChange}
+          className="modal__input"
+          placeholder="Email"
+          required
+          disabled={isLoading}
+        />
+        {errors.email && <span className="modal__error">{errors.email}</span>}
+      </label>
+      <label htmlFor="login-password" className="modal__label">
+        Password
+        <input
+          type="password"
+          id="login-password"
+          name="password"
+          value={values.password || ""}
+          onChange={handleChange}
+          className="modal__input"
+          placeholder="Password"
+          required
+          disabled={isLoading}
+        />
+        {errors.password && <span className="modal__error">{errors.password}</span>}
+      </label>
+      {error && <p className="modal__error">{error}</p>}
+      <p className="modal__switch-text">
+        or{" "}
+        <button type="button" className="modal__switch-button" onClick={onSwitchToRegister}>
+          Sign Up
+        </button>
+      </p>
+    </ModalWithForm>
   );
 };
 

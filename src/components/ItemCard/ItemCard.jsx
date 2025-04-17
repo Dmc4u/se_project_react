@@ -11,23 +11,17 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     isLiked ? "cards__like-button_active" : ""
   }`;
 
-  const handleLike = () => {
-    if (onCardLike) {
-      onCardLike({ id: item._id, isLiked });
-    }
-  };
-
   return (
     <li className="cards__item">
       <div className="card__description">
         <h2 className="cards__item-title">{item.name}</h2>
-        {currentUser && (
+        <div className="card__actions">
           <button
             className={itemLikeButtonClassName}
-            onClick={handleLike}
+            onClick={() => onCardLike({ id: item._id, isLiked })}
             aria-label="Like"
           />
-        )}
+        </div>
       </div>
       <img
         src={item.imageUrl}

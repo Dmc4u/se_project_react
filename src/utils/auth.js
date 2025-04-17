@@ -6,7 +6,6 @@ function checkResponse(res) {
   }
   return Promise.reject(`Error: ${res.status}`);
 }
-
 export function signup({ name, avatar, email, password }) {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
