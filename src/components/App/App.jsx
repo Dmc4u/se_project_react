@@ -130,7 +130,7 @@ function App() {
   const handleRegister = ({ name, avatar, email, password }) => {
     return signup({ name, avatar, email, password })
       .then(() => handleLogin({ email, password }))
-      .then(() => setActiveModal(null))
+      .then(() => handleModalClose())
       .catch(console.error);
   };
 
@@ -141,11 +141,13 @@ function App() {
         setIsLoggedIn(true);
         return checkToken(res.token).then((data) => {
           setCurrentUser(data);
+          handleModalClose(); // ✅ close modal before navigating
           navigate("/profile");
         });
       })
       .catch(console.error);
   };
+  
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
