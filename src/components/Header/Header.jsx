@@ -22,8 +22,6 @@ function Header({ handleAddClick, weatherData, onLogin, onRegister, isLoggedIn }
     if (currentUser?.avatar) {
       return <img src={currentUser.avatar} alt="User Avatar" className="header__avatar" />;
     }
-
-    // Placeholder with the first letter of the user's name if no avatar is provided
     const firstLetter = currentUser?.name?.charAt(0).toUpperCase() || "?";
     return <div className="header__avatar-placeholder">{firstLetter}</div>;
   };
@@ -33,49 +31,71 @@ function Header({ handleAddClick, weatherData, onLogin, onRegister, isLoggedIn }
       <Link to="/" className="header__logo-link">
         <img src={logo} alt="WTWR" className="header__logo" />
       </Link>
+
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city || "Loading..."}
       </p>
+
+      {/* Always show ToggleSwitch on desktop */}
       <ToggleSwitch className="header__toggle-switch" />
-      {isLoggedIn ? (
-        <>
-          <button
-            onClick={handleAddClick}
-            type="button"
-            className="header__add-clothes-btn modal__button"
-          >
-            + Add Clothes
-          </button>
-          <Link to="/profile" className="header__profile-link">
-            <div className="header__user-container">
-              <p className="header__username">{currentUser?.name || "User"}</p>
-              {renderUserAvatar()}
-            </div>
-          </Link>
-        </>
-      ) : (
-        <div className="header__auth-buttons">
-          <button onClick={onLogin} className="header__auth-btn">
-            Log In
-          </button>
-          <button onClick={onRegister} className="header__auth-btn">
-            Sign Up
-          </button>
-        </div>
-      )}
+
+      {/* Desktop view */}
+      <div className="header__desktop-actions">
+        {isLoggedIn ? (
+          <div className="header__desktop-user">
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-btn modal__button"
+            >
+              + Add Clothes
+            </button>
+            <Link to="/profile" className="header__profile-link">
+              <div className="header__user-container">
+                <p className="header__username">{currentUser?.name || "User"}</p>
+                {renderUserAvatar()}
+              </div>
+            </Link>
+          </div>
+        ) : (
+          <div className="header__auth-buttons">
+            <button onClick={onLogin} className="header__auth-btn">
+              Log In
+            </button>
+            <button onClick={onRegister} className="header__auth-btn">
+              Sign Up
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Mobile Menu button */}
       <button onClick={toggleMobileMenu} className="header__menu-btn">
         {isMobileMenuOpened ? "Close" : "Menu"}
       </button>
+
+      {/* Mobile menu */}
       {isMobileMenuOpened && (
         <nav className="nav-open">
           <div className="header__menu-content">
-            <p className="header__menu-date">
-              {currentDate}, {weatherData.city || "Loading..."}
-            </p>
+            <div className="header__menu-top">
+              <p className="header__menu-date">
+                {currentDate}, {weatherData.city || "Loading..."}
+              </p>
+              <ToggleSwitch className="header__toggle-switch" />
+            </div>
+
             {isLoggedIn ? (
               <>
-                {renderUserAvatar()}
-                <p className="header__menu-username">{currentUser?.name || "User"}</p>
+                <Link
+                  to="/profile"
+                  className="header__menu-profile-link"
+                  onClick={() => setIsMobileMenuOpened(false)}
+                >
+                  {renderUserAvatar()}
+                  <p className="header__menu-username">{currentUser?.name || "User"}</p>
+                </Link>
+
                 <ul className="header__menu-list">
                   <li>
                     <button

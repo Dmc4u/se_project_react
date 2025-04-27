@@ -1,16 +1,17 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 32px 0 28px;
   position: relative;
 }
- 
+
 .header__logo {
   width: 89px;
   height: 40px;
   margin-right: 24px;
 }
- 
+
 .header__date-and-location {
   font-family: 'Cabinet Grotesk', sans-serif;
   font-weight: 700;
@@ -18,9 +19,20 @@
   color: rgba(0, 0, 0, 1);
   margin: 0;
 }
- 
+
 .header__toggle-switch {
   margin-right: 20px;
+}
+
+/* Reset ToggleSwitch inside mobile menu */
+.nav-open .header__toggle-switch {
+  margin: 0 0 10px 0;
+}
+
+.header__desktop-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .header__auth-buttons {
@@ -39,7 +51,7 @@
   background: none;
   cursor: pointer;
 }
- 
+
 .header__add-clothes-btn {
   font-weight: 700;
   font-size: 18px;
@@ -48,7 +60,7 @@
   background: none;
   cursor: pointer;
 }
- 
+
 .header__user-container {
   display: flex;
   align-items: center;
@@ -56,20 +68,20 @@
   gap: 12px;
   cursor: pointer;
 }
- 
+
 .header__username {
   font-weight: 700;
   font-size: 18px;
   margin: 0;
 }
- 
+
 .header__avatar {
   width: 40px;
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 50%;
 }
- 
+
 .header__menu-btn {
   display: none;
   background: none;
@@ -80,56 +92,76 @@
   cursor: pointer;
   visibility: hidden;
 }
- 
+
 .nav-open {
   display: block;
   position: absolute;
-  top: 50px; /* Adjusted to appear above the WeatherCard */
-  right: 20px;
+  top: 60px;
+  right: 10px;
   background: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 220px;
+  padding: 24px 20px;
+  width: 240px;
   border-radius: 8px;
-  z-index: 100; /* Ensures it appears above all content */
+  z-index: 100;
+  animation: slideDown 0.3s ease forwards;
 }
- 
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 .header__menu-content {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 12px;
 }
- 
+
+.header__menu-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .header__menu-avatar {
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
- 
+
 .header__menu-username {
-  font-size: 20px;
-  font-weight: 700;
-  margin: 10px 0;
-  color: #000;
- 
-}
- 
-.header__menu-date {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin: 8px 0;
+  color: #000;
 }
- 
+
+.header__menu-date {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
 .header__menu-list {
   list-style: none;
   padding: 0;
   text-align: center;
 }
- 
+
 .header__menu-list li {
   margin-top: 10px;
 }
- 
+
 .header__menu-list button {
   font-size: 16px;
   font-weight: 700;
@@ -137,30 +169,34 @@
   border: none;
   cursor: pointer;
 }
- 
+
 .header__menu-list button:hover {
   color: rgba(0, 0, 0, 0.7);
 }
- 
+
 .header__menu-list button:active {
   color: rgba(0, 0, 0, 0.5);
 }
- 
+
 .header__profile-link {
   text-decoration: none;
   color: #000;
 }
- 
+
+/* Mobile adjustments */
 @media (max-width: 768px) {
   .header__menu-btn {
     display: block;
     visibility: visible;
   }
- 
-  .header__add-clothes-btn, .header__user-container, .header__date-and-location {
+
+  .header__add-clothes-btn,
+  .header__user-container,
+  .header__date-and-location,
+  .header__auth-buttons {
     display: none;
   }
- 
+
   .nav-open {
     top: 60px;
     right: 10px;

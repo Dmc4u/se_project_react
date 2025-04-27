@@ -1,3 +1,8 @@
+export const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.mywears.crabdance.com"
+    : "http://localhost:3001";
+
 const BASE_PATH = "../assets";
 
 export const weatherOptions = [
@@ -16,58 +21,3 @@ export const weatherOptions = [
   { day: true, condition: "snow", url: new URL(`${BASE_PATH}/day/snow.png`, import.meta.url), color: "rgba(240, 248, 255, 1)" },
   { day: false, condition: "snow", url: new URL(`${BASE_PATH}/night/snow-night.png`, import.meta.url), color: "rgba(211, 211, 211, 1)" }
 ];
-
-
-
-
-
-export const API_KEY = "609a2068c9818f6f35269aa1f2affaf5";
-
-export const DEFAULT_COORDINATES = {
-  latitude: "40.7128", // Example: New York City
-  longitude: "-74.0060",
-};
-
-export const defaultClothingItems = [
-  {
-    _id: 0,
-    name: "Cap",
-    weather: "hot",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Cap.png",
-  },
-  {
-    _id: 1,
-    name: "Hoodie",
-    weather: "warm",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png",
-  },
-  {
-    _id: 2,
-    name: "Jacket",
-    weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Jacket.png",
-  },
-  {
-    _id: 3,
-    name: "Sneakers",
-    weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Sneakers.png",
-  },
-  {
-    _id: 4,
-    name: "T-Shirt",
-    weather: "hot",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png",
-  },
-  {
-    _id: 5,
-    name: "Coat",
-    weather: "cold",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png",
-  },
-];
-
-
-
-
-

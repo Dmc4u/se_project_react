@@ -1,4 +1,9 @@
-const baseUrl = 'http://localhost:3001';
+import { baseUrl } from "./constants.js";
+
+// const baseUrl =
+//   process.env.NODE_ENV === "production"
+//     ? "https://api.mywears.crabdance.com"
+//     : "http://localhost:3001";
 
 function checkResponse(res) {
   if (res.ok) {

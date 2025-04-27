@@ -72,16 +72,14 @@ function App() {
   };
 
   const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
-    const token = localStorage.getItem("jwt");
-    if (!token) return Promise.reject("Unauthorized");
-
-    return addItem({ name, imageUrl, weather, token })
+    return addItem({ name, imageUrl, weather })
       .then((addedItem) => {
         setClothingItems((prevItems) => [addedItem, ...prevItems]);
         handleModalClose();
       })
       .catch(console.error);
   };
+  
 
   const handleDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
