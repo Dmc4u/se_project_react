@@ -14,20 +14,24 @@
 .card__description {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Spread title and like */
   position: absolute;
-  top: 15px;
+  top: 20px; /* More breathing room from top */
+  left: 15px;
+  right: 15px;
   margin: 0;
   gap: 10px;
 }
 
 .cards__item-title {
-  font-family: Cabinet Grotesk;
+  font-family: "Cabinet Grotesk", sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.6);
-  background: rgba(255, 255, 255, 1);
+  background: #ffffff;
   padding: 2px 12px;
+  border-radius: 6px;
 }
 
 .cards__item-image {
@@ -35,33 +39,40 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  cursor: pointer;
+}
+
+.card__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px; /* Small gap below top */
 }
 
 .cards__like-button {
   background: none;
   border: none;
-  font-size: 16px;
   cursor: pointer;
-  width: 18px; /* Example size based on Figma design */
+  width: 18px;
   height: 15px;
-  background-color: transparent; /* Match background if it's transparent */
-  background-image: url("../../assets/like-button.svg"); 
+  background-color: transparent;
+  background-image: url("../../assets/like-button.svg");
   background-size: cover;
   background-repeat: no-repeat;
-  transition: transform 0.2s ease; /* For hover/active effects */
+  transition: transform 0.2s ease;
 }
 
 .cards__like-button_active {
-  color: red;
-  background-image: url("../../assets/Like-Button-Active.svg"); /* Change to "liked" state icon */
+  background-image: url("../../assets/Like-Button-Active.svg");
 }
 
 .cards__like-button:hover {
-  transform: scale(1.1); /* Slightly enlarge on hover */
+  transform: scale(1.1);
 }
 
+/* Optional Delete Button */
 .cards__delete-button {
-  background-color: #f44336; /* Red background */
+  background-color: #f44336;
   color: white;
   border: none;
   border-radius: 4px;
@@ -72,5 +83,23 @@
 }
 
 .cards__delete-button:hover {
-  background-color: #d32f2f; /* Darker red for hover */
+  background-color: #d32f2f;
+}
+
+/* ✅ Bonus: Mobile friendly improvements */
+@media (max-width: 500px) {
+  .cards__item {
+    width: 90%;
+    height: auto;
+  }
+
+  .cards__item-title {
+    font-size: 14px;
+    padding: 2px 8px;
+  }
+
+  .cards__like-button {
+    width: 16px;
+    height: 14px;
+  }
 }
