@@ -14,24 +14,21 @@
 .card__description {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Spread title and like */
+  justify-content: center;
   position: absolute;
-  top: 20px; /* More breathing room from top */
-  left: 15px;
-  right: 15px;
+  top: 15px;
   margin: 0;
   gap: 10px;
 }
 
 .cards__item-title {
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: Cabinet Grotesk;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.6);
-  background: #ffffff;
+  background: rgba(255, 255, 255, 1);
   padding: 2px 12px;
-  border-radius: 6px;
 }
 
 .cards__item-image {
@@ -39,7 +36,6 @@
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
-  cursor: pointer;
 }
 
 .card__actions {
@@ -52,27 +48,28 @@
 .cards__like-button {
   background: none;
   border: none;
+  font-size: 16px;
   cursor: pointer;
-  width: 18px;
+  width: 18px; /* Example size based on Figma design */
   height: 15px;
-  background-color: transparent;
-  background-image: url("../../assets/like-button.svg");
+  background-color: transparent; /* Match background if it's transparent */
+  background-image: url("../../assets/like-button.svg"); 
   background-size: cover;
   background-repeat: no-repeat;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease; /* For hover/active effects */
 }
 
 .cards__like-button_active {
-  background-image: url("../../assets/Like-Button-Active.svg");
+  color: red;
+  background-image: url("../../assets/Like-Button-Active.svg"); /* Change to "liked" state icon */
 }
 
 .cards__like-button:hover {
-  transform: scale(1.1);
+  transform: scale(1.1); /* Slightly enlarge on hover */
 }
 
-/* Optional Delete Button */
 .cards__delete-button {
-  background-color: #f44336;
+  background-color: #f44336; /* Red background */
   color: white;
   border: none;
   border-radius: 4px;
@@ -83,10 +80,9 @@
 }
 
 .cards__delete-button:hover {
-  background-color: #d32f2f;
+  background-color: #d32f2f; /* Darker red for hover */
 }
 
-/* ✅ Bonus: Mobile friendly improvements */
 @media (max-width: 500px) {
   .cards__item {
     width: 90%;
