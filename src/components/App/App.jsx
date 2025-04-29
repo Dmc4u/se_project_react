@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
@@ -26,6 +26,7 @@ import { signup, signin, checkToken } from "../../utils/auth";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // State to track loading state
   const [currentUser, setCurrentUser] = useState(null);
   const [weatherData, setWeatherData] = useState({
     city: "",
@@ -48,8 +49,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems().then(setClothingItems).catch(console.error);
-  }, []);
+    if (isLoggedIn) {
+     getItems()
+       .then(setClothingItems)
+       .catch(console.error);
+    }
+    }, [isLoggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
@@ -63,9 +68,12 @@ function App() {
           localStorage.removeItem("jwt");
           setIsLoggedIn(false);
           setCurrentUser(null);
-        });
+        })
+        .finally(() => setIsLoading(false)); // Set isLoading to false in both success and failure cases
+    } else {
+      setIsLoading(false); // No token, set isLoading to false
     }
-  }, [navigate, setIsLoggedIn, setCurrentUser]);
+  }, []);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
@@ -79,7 +87,6 @@ function App() {
       })
       .catch(console.error);
   };
-  
 
   const handleDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
@@ -145,7 +152,6 @@ function App() {
       })
       .catch(console.error);
   };
-  
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -180,10 +186,14 @@ function App() {
   const onSwitchToLogin = () => setActiveModal("login");
   const onSwitchToRegister = () => setActiveModal("register");
 
+  if (isLoading) {
+    return <div className="loading">Loading...</div>; // Render a loading indicator while checking authentication
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider
-         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="page">
           <Header
@@ -232,13 +242,13 @@ function App() {
             isOpen={activeModal === "register"}
             onRegister={handleRegister}
             onClose={handleModalClose}
-            onSwitchToLogin={onSwitchToLogin} // Reuse function
+            onSwitchToLogin={onSwitchToLogin}
           />
           <LoginModal
             isOpen={activeModal === "login"}
             onLogin={handleLogin}
             onClose={handleModalClose}
-            onSwitchToRegister={onSwitchToRegister} // Reuse function
+            onSwitchToRegister={onSwitchToRegister}
           />
           <ItemModal
             isOpen={activeModal === "preview"}
