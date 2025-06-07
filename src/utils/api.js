@@ -36,7 +36,7 @@ function addItem(newItem) {
   });
 }
 
-// DELETE: Remove a clothing item
+// DELETE: Remove a clothing item 
 function deleteItem(id) {
   return request(`${baseUrl}/items/${id}`, {
     method: 'DELETE',

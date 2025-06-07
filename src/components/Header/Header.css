@@ -201,4 +201,12 @@
     top: 60px;
     right: 10px;
   }
+
+   .header__toggle-switch {
+    display: none;
+  }
+  .nav-open .header__toggle-switch {
+    display: block;
+    margin: 0 auto 10px auto; /* center horizontally, 10px bottom margin */
+  }
 }

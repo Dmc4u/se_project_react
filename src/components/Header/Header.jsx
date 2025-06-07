@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
@@ -8,6 +8,7 @@ import CurrentUserContext from "../../utils/CurrentUserContext";
 function Header({ handleAddClick, weatherData, onLogin, onRegister, isLoggedIn }) {
   const currentUser = useContext(CurrentUserContext);
   const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
+  const location = useLocation(); // Get current path
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpened(!isMobileMenuOpened);
@@ -36,8 +37,10 @@ function Header({ handleAddClick, weatherData, onLogin, onRegister, isLoggedIn }
         {currentDate}, {weatherData.city || "Loading..."}
       </p>
 
-      {/* Always show ToggleSwitch on desktop */}
-      <ToggleSwitch className="header__toggle-switch" />
+      {/* ToggleSwitch only if not on /profile */}
+      {location.pathname !== "/profile" && (
+        <ToggleSwitch className="header__toggle-switch" />
+      )}
 
       {/* Desktop view */}
       <div className="header__desktop-actions">
@@ -82,7 +85,10 @@ function Header({ handleAddClick, weatherData, onLogin, onRegister, isLoggedIn }
               <p className="header__menu-date">
                 {currentDate}, {weatherData.city || "Loading..."}
               </p>
-              <ToggleSwitch className="header__toggle-switch" />
+              {/* Hide toggle switch on /profile route */}
+              {location.pathname !== "/profile" && (
+                <ToggleSwitch className="header__toggle-switch" />
+              )}
             </div>
 
             {isLoggedIn ? (

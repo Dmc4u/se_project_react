@@ -127,10 +127,10 @@ function App() {
     }
   };
 
-  const handleModalClose = () => {
-    setActiveModal(null);
-    setCardToDelete(null);
-  };
+  const handleModalClose = () => { 
+    setActiveModal(null);    
+    setCardToDelete(null);     
+  };      
 
   const handleRegister = ({ name, avatar, email, password }) => {
     return signup({ name, avatar, email, password })
